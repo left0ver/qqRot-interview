@@ -5,10 +5,16 @@
   "repository": "git@github.com:left0ver/qqRot-interview.git",
   "author": "left0ver <1614674987@qq.com>",
   "license": "MIT",
+  "scripts": {
+    "start:prod": "cross-env NODE_ENV=production esno lib/index.ts",
+    "start:dev": "cross-env NODE_ENV=development esno lib/index.ts"
+  },
   "dependencies": {
+    "mysql2": "^2.3.3",
     "oicq": "^2.3.1"
   },
   "devDependencies": {
+    "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "cross-env": "^7.0.3",
