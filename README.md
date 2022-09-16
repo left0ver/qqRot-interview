@@ -62,7 +62,8 @@ crontab -e  # 创建定时任务
 
 # 设置定时任务 ，类似下图框出来的部分，替换一下路径和命令即可,图中设置的是每日10点发送面试题
 ```
-![leftover](https://leftover-md.oss-cn-guangzhou.aliyuncs.com/img-md/20220916225908-2022-09-16.png)
+
+<img src="https://leftover-md.oss-cn-guangzhou.aliyuncs.com/img-md/20220916231710-2022-09-16.png"/>
 
 对于定时任务不了解的同学可以看一下这个[教程](https://www.cnblogs.com/colinliu/p/crontab.html)
 
