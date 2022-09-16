@@ -7,9 +7,31 @@ interface Question extends RowDataPacket {
   question: string
   isSend: 0 | 1
 }
+interface Args {
+  random?: boolean
+  groupId?: number
+}
+
+// 解析用户输入的命令行参数
+const args = process.argv.slice(2)
+const finallyArgs: Args = {}
+for (const arg of args) {
+  const value = arg.split('=')
+  if (value[0].toLocaleLowerCase() === 'random') {
+    finallyArgs.random = Boolean(value[1])
+  }
+  if (value[0].toLocaleLowerCase() === 'groupid') {
+    finallyArgs.groupId = Number(value[1])
+  }
+}
+
+const finalGroupId = finallyArgs.groupId || groupId
+const isRandom = Boolean(finallyArgs.random)
+
 const bot = createClient(accountInfo.account)
-const group = bot.pickGroup(groupId)
+const group = bot.pickGroup(finalGroupId)
 const connection = mysql.createConnection(databaseInfo)
+
 bot
   .on('system.login.slider', function () {
     console.log('输入ticket：')
@@ -21,10 +43,20 @@ bot
 bot.on('system.online', async () => {
   try {
     await connection.promise().connect()
-    const [questions] = await connection
-      .promise()
-      .query<Question[]>('select * from question where isSend != 1')
-    if (questions.length === 0) {
+    let question: Question | undefined = undefined
+    if (isRandom) {
+      const [questions] = await connection
+        .promise()
+        .query<Question[]>('select * from question')
+      question = questions[Math.floor(Math.random() * questions.length)]
+    } else {
+      const [questions] = await connection
+        .promise()
+        .query<Question[]>('select * from question where isSend != 1')
+      question = questions[0]
+    }
+
+    if (question === undefined) {
       // 飙泪表情
       const sadEnjoy = segment.face(210)
       await group.sendMsg(['没有面试题了哦,请耐心等待更新面试题哦! ', sadEnjoy])
@@ -35,12 +67,14 @@ bot.on('system.online', async () => {
       const invite = segment.text(' 大家快来和小冰一起做题吧!')
       // 花朵脸表情
       const faceEnjoy = segment.face(337)
-      await group.sendMsg([tip, questions[0].question])
+      await group.sendMsg([tip, question.question])
       await group.sendMsg([atAll, invite, faceEnjoy])
-      // 更新为1，表示已经发过了
-      await connection
-        .promise()
-        .query(`update question set isSend=1 where qid=${questions[0].qid}`)
+      //如果不是随机，则更新为1，表示已经发过了
+      if (!isRandom) {
+        await connection
+          .promise()
+          .query(`update question set isSend=1 where qid=${question.qid}`)
+      }
     }
   } catch (error) {
     console.error(error)
