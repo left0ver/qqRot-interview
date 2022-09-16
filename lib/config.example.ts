@@ -12,6 +12,7 @@ interface DataBaseInfo {
   database: string
   port: number
 }
+// 生产环境下的数据库配置
 const productionDataBaseInfo: DataBaseInfo = {
   host: '0.0.0.0',
   user: 'root',
@@ -19,6 +20,7 @@ const productionDataBaseInfo: DataBaseInfo = {
   database: '',
   port: 3306,
 }
+// 开发环境下的数据库配置
 const developmentDataBaseInfo: DataBaseInfo = {
   host: 'localhost', //ip地址
   user: 'root', //用户名
