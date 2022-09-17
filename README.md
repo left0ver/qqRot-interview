@@ -5,6 +5,7 @@
 <img src="https://img.shields.io/github/package-json/v/left0ver/qqRot-interview"/>
 <img src="https://img.shields.io/badge/language-typescript-blue"/>
 <img src="https://img.shields.io/badge/database-mysql-%230074a3"/>
+<img src="https://visitor-badge.glitch.me/badge?page_id=left0ver.qqRot-interview"/>
 </div>
 
 # overview
