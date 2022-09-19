@@ -1,6 +1,6 @@
 {
   "name": "qqRot-interview",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "lib/index.ts",
   "repository": "git@github.com:left0ver/qqRot-interview.git",
   "author": "left0ver <1614674987@qq.com>",
