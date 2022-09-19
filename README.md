@@ -71,7 +71,7 @@ crontab -e  # 创建定时任务
 **部署到服务器之后最好自己先运行一遍，因为换了一台电脑，可能会出现qq需要重新登陆到情况**
 
 # TODO：
- - [ ] 使用github action 做定时任务
+ - [ ] ~~使用github action 做定时任务~~
 
 # License
 
