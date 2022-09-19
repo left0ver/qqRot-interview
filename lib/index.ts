@@ -64,9 +64,9 @@ bot.on('system.online', async () => {
       // at全体
       const atAll = segment.at('all')
       const tip = segment.text('每日一题：\n')
-      const invite = segment.text(' 大家快来和小冰一起做题吧!')
-      // 花朵脸表情
-      const faceEnjoy = segment.face(337)
+      const invite = segment.text(' 大家快来和小冰一起做题吧! ')
+      // 加油必胜表情
+      const faceEnjoy = segment.face(245)
       await group.sendMsg([tip, question.question])
       await group.sendMsg([atAll, invite, faceEnjoy])
       //如果不是随机，则更新为1，表示已经发过了
