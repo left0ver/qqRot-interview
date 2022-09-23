@@ -47,8 +47,9 @@ cp lib/config.example.ts /lib/config.ts
 1. 默认情况下是发送第一条没有发过的的面试题
    如果你想要随机从数据库中发送一条面试题，你可以在原有的命令后面加上 random=true
 2. 一般情况下你可以在 lib/config.ts 下面配置你想要发送的群（机器人必须在群里才可以），当然你也可以使用命令行的方式指定发送到某个群，在原有的命令后面加上 groupId=[your group number]
+3. 你可以指定是否 at 全体成员，默认不 at 全体，在原有的命令后面添加 atall=true 即可艾特全体成员(机器人有 at 全体的次数)
 
-> eg: yarn start:prod random=true groupId=123456789
+> eg: yarn start:prod random=true groupId=123456789 atall=true
 
 # 登陆
 

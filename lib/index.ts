@@ -10,6 +10,7 @@ interface Question extends RowDataPacket {
 interface Args {
   random?: boolean
   groupId?: number
+  atAll?: boolean
 }
 
 // 解析用户输入的命令行参数
@@ -18,15 +19,19 @@ const finallyArgs: Args = {}
 for (const arg of args) {
   const value = arg.split('=')
   if (value[0].toLocaleLowerCase() === 'random') {
-    finallyArgs.random = Boolean(value[1])
+    finallyArgs.random = value[1] === 'true' ? true : false
   }
   if (value[0].toLocaleLowerCase() === 'groupid') {
     finallyArgs.groupId = Number(value[1])
   }
+  if (value[0].toLocaleLowerCase() === 'atall') {
+    finallyArgs.atAll = value[1] === 'true' ? true : false
+  }
 }
 
 const finalGroupId = finallyArgs.groupId || groupId
-const isRandom = Boolean(finallyArgs.random)
+const isRandom = Boolean(finallyArgs.random) || false
+const isAtAll = Boolean(finallyArgs.atAll) || false
 
 const bot = createClient(accountInfo.account)
 const group = bot.pickGroup(finalGroupId)
@@ -62,13 +67,16 @@ bot.on('system.online', async () => {
       await group.sendMsg(['没有面试题了哦,请耐心等待更新面试题哦! ', sadEnjoy])
     } else {
       // at全体
+      await group.getAtAllRemainder()
       const atAll = segment.at('all')
       const tip = segment.text('每日一题：\n')
       const invite = segment.text(' 大家快来和小冰一起做题吧! ')
       // 加油必胜表情
       const faceEnjoy = segment.face(245)
       await group.sendMsg([tip, question.question])
-      await group.sendMsg([atAll, invite, faceEnjoy])
+      isAtAll && (await group.getAtAllRemainder()) > 1
+        ? await group.sendMsg([atAll, invite, faceEnjoy])
+        : await group.sendMsg([invite, faceEnjoy])
       //如果不是随机，则更新为1，表示已经发过了
       if (!isRandom) {
         await connection
