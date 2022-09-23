@@ -1,7 +1,15 @@
 {
   "name": "qqRot-interview",
   "version": "1.0.0",
+  "private": true,
   "main": "lib/index.ts",
+  "description": "一个每日定时向qq群里面发送面试题的QQ机器人，支持部署到自己的服务器上",
+  "keywords": [
+    "qqRot-interview",
+    "qqRot",
+    "Rot",
+    "send-interview"
+  ],
   "repository": "git@github.com:left0ver/qqRot-interview.git",
   "author": "left0ver <1614674987@qq.com>",
   "license": "MIT",
