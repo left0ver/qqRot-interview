@@ -1,12 +1,9 @@
-import { accountInfo, databaseInfo, groupId } from './config'
+import 'reflect-metadata'
 import { createClient, segment } from 'oicq'
-import mysql from 'mysql2'
-import type { RowDataPacket } from 'mysql2'
-interface Question extends RowDataPacket {
-  qid: number
-  question: string
-  isSend: 0 | 1
-}
+import { DataSource } from 'typeorm'
+import { Question } from './entity/Question'
+import { accountInfo, databaseInfo, groupId, MyNamingStrategy } from './config'
+
 interface Args {
   random?: boolean
   groupId?: number
@@ -28,14 +25,23 @@ for (const arg of args) {
     finallyArgs.atAll = value[1] === 'true' ? true : false
   }
 }
-
+// 命令行输入的参数
 const finalGroupId = finallyArgs.groupId || groupId
 const isRandom = Boolean(finallyArgs.random) || false
 const isAtAll = Boolean(finallyArgs.atAll) || false
 
 const bot = createClient(accountInfo.account)
 const group = bot.pickGroup(finalGroupId)
-const connection = mysql.createConnection(databaseInfo)
+
+// 连接数据库
+const AppDataSource = new DataSource({
+  ...databaseInfo,
+  type: 'mysql',
+  entities: [Question],
+  synchronize: true,
+  logging: false,
+  namingStrategy: new MyNamingStrategy(),
+})
 
 bot
   .on('system.login.slider', function () {
@@ -47,56 +53,56 @@ bot
   .login(accountInfo.password)
 bot.on('system.online', async () => {
   try {
-    await connection.promise().connect()
-    let question: Question | undefined = undefined
+    await AppDataSource.initialize()
+    const questionRepository = AppDataSource.getRepository(Question)
+    let rowData: Question | undefined | null = undefined
     if (isRandom) {
-      const [questions] = await connection
-        .promise()
-        .query<Question[]>('select * from question')
-      question = questions[Math.floor(Math.random() * questions.length)]
+      const questions = await questionRepository.find()
+      rowData = questions[Math.floor(Math.random() * questions.length)]
     } else {
-      const [questions] = await connection
-        .promise()
-        .query<Question[]>('select * from question where isSend != 1')
-      question = questions[0]
+      rowData = await questionRepository.findOne({
+        where: { isSend: false },
+      })
     }
-
-    if (question === undefined) {
+    // 没有面试题
+    if (rowData === undefined || rowData === null) {
       // 飙泪表情
       const sadEnjoy = segment.face(210)
       await group.sendMsg(['没有面试题了哦,请耐心等待更新面试题哦! ', sadEnjoy])
     } else {
       // at全体
-      await group.getAtAllRemainder()
       const atAll = segment.at('all')
       const tip = segment.text('每日一题：\n')
       const invite = segment.text(' 大家快来和小冰一起做题吧! ')
       // 加油必胜表情
       const faceEnjoy = segment.face(245)
-      await group.sendMsg([tip, question.question])
+      await group.sendMsg([tip, rowData.question])
       isAtAll && (await group.getAtAllRemainder()) > 1
         ? await group.sendMsg([atAll, invite, faceEnjoy])
         : await group.sendMsg([invite, faceEnjoy])
-      //如果不是随机，则更新为1，表示已经发过了
+      //如果不是随机，则更新为true，表示已经发过了
       if (!isRandom) {
-        await connection
-          .promise()
-          .query(`update question set isSend=1 where qid=${question.qid}`)
+        await questionRepository
+          .createQueryBuilder()
+          .update()
+          .set({ isSend: true })
+          .where({ qid: rowData.qid })
+          .execute()
       }
     }
   } catch (error) {
     console.error(error)
   } finally {
-    connection.end()
+    await AppDataSource.destroy()
     bot.logout()
     console.warn('已经退出登陆')
   }
 })
-bot.on('system.offline.kickoff', () => {
+bot.on('system.offline.kickoff', async () => {
+  await AppDataSource.destroy()
   console.error('服务器踢下线')
-  connection.end()
 })
-bot.on('system.offline.network', () => {
+bot.on('system.offline.network', async () => {
+  await AppDataSource.destroy()
   console.error('网络错误导致下线')
-  connection.end()
 })

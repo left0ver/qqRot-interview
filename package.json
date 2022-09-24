@@ -19,7 +19,9 @@
   },
   "dependencies": {
     "mysql2": "^2.3.3",
-    "oicq": "^2.3.1"
+    "oicq": "^2.3.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.10"
   },
   "devDependencies": {
     "@types/node": "^18.7.18",
