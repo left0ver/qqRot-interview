@@ -53,7 +53,7 @@ bot
   .login(accountInfo.password)
 bot.on('system.online', async () => {
   try {
-    await AppDataSource.initialize()
+    !AppDataSource.isInitialized && (await AppDataSource.initialize())
     const questionRepository = AppDataSource.getRepository(Question)
     let rowData: Question | undefined | null = undefined
     if (isRandom) {

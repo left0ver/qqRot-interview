@@ -16,7 +16,8 @@
   "scripts": {
     "start:prod": "cross-env NODE_ENV=production esno lib/index.ts",
     "start:dev": "cross-env NODE_ENV=development esno lib/index.ts",
-    "init:database": "esno lib/initDataBase.ts"
+    "init:database:prod": "cross-env NODE_ENV=production esno lib/initDataBase.ts",
+    "init:database:dev": "cross-env NODE_ENV=development esno lib/initDataBase.ts"
   },
   "dependencies": {
     "mysql2": "^2.3.3",
