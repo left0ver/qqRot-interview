@@ -7,6 +7,8 @@
 <img src="https://visitor-badge.glitch.me/badge?page_id=left0ver.qqRot-interview"/>
 </div>
 
+如果觉得本项目对您有帮助，那就点个 star 吧 💕
+
 # overview
 
 该项目是基于[oicq](https://github.com/takayama-lily/oicq)的一个 qq 机器人，用于每日定时向 qq 群里面发送面试题，支持部署到自己的服务器,前端使用 ts，数据库使用 mysql
@@ -15,19 +17,7 @@
 
 ```shell
 git clone  --depth=1 https://github.com/left0ver/qqRot-interview.git
-```
 
-## 初始化数据库
-
-打开你的 mysql 数据库，新建一个数据库，运行项目根目录下的 sql 文件导入表结构，表结构如下所示
-
-![leftover](https://leftover-md.oss-cn-guangzhou.aliyuncs.com/img-md/20220916213014-2022-09-16.png)
-
-- qid:主键
-- question：问题（面试题）
-- isSend：是否已经发送过该面试题，0 表示未发送，1 表示已发送
-
-```
 yarn install # 下载依赖
 
 cd qqRot-interview
@@ -35,6 +25,8 @@ cd qqRot-interview
 cp lib/config.example.ts /lib/config.ts
 
 修改lib/config.ts文件里的配置即可，配置自己的qq号和qq密码，以及数据库的一些配置
+
+yarn init:database   # 初始化数据库，自动生成表结构
 
 启动：
 开发环境下运行 yarn start:dev
@@ -77,7 +69,8 @@ crontab -e  # 创建定时任务
 # TODO：
 
 - [ ] ~~使用 github action 做定时任务~~
-- [ ] 使用 typeorm 来重构数据库的操作
+- [x] 使用 typeorm 来重构数据库的操作
+- [ ] 搭建一个前台用来录入面试题
 - [ ] 添加对微信机器人的支持
 - [ ] 添加查询天气预报的功能
 - [ ] 使用 vuepress 或者 vitepress 来编写使用文档
@@ -85,5 +78,3 @@ crontab -e  # 创建定时任务
 # License
 
 [MIT](https://github.com/left0ver/qqRot-interview/blob/main/LICENSE)
-
-如果觉得本项目对您有帮助，那就点个 star 吧 💕
