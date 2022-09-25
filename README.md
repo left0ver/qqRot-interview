@@ -13,6 +13,15 @@
 
 该项目是基于[oicq](https://github.com/takayama-lily/oicq)的一个 qq 机器人，用于每日定时向 qq 群里面发送面试题，支持部署到自己的服务器,前端使用 ts，数据库使用 mysql
 
+# Example
+
+![leftover](https://leftover-md.oss-cn-guangzhou.aliyuncs.com/img-md/20220925172408-2022-09-25.png)
+
+# Feature
+
+- :rocket: 定时发送面试题
+- :tada: 支持自定义群号，是否随机发送面试题，是否 at 全体成员
+
 # setup
 
 ```shell
@@ -24,9 +33,11 @@ cd qqRot-interview
 
 cp lib/config.example.ts /lib/config.ts
 
+在mysql中新建一个数据库
+
 修改lib/config.ts文件里的配置即可，配置自己的qq号和qq密码，以及数据库的一些配置
 
-yarn init:database   # 初始化数据库，自动生成表结构
+yarn init:database:dev  or yarn init:database:prod   # 初始化数据库，自动生成表结构
 
 启动：
 开发环境下运行 yarn start:dev
