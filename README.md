@@ -27,11 +27,11 @@
 ```shell
 git clone  --depth=1 https://github.com/left0ver/qqRot-interview.git
 
-yarn install # 下载依赖
-
 cd qqRot-interview
 
-cp lib/config.example.ts /lib/config.ts
+yarn install # 下载依赖
+
+cp lib/config.example.ts lib/config.ts
 
 在mysql中新建一个数据库
 
