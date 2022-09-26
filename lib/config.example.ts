@@ -20,7 +20,7 @@ interface DataBaseInfo {
 }
 // 生产环境下的数据库配置
 const productionDataBaseInfo: DataBaseInfo = {
-  host: '0.0.0.0',
+  host: '0.0.0.0', // 如果是在服务器上执行，填写0.0.0.0,如果是本地想要读取服务器上的数据库，则填写服务器的ip
   username: 'root',
   password: '',
   database: '',

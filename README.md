@@ -35,40 +35,46 @@ cp lib/config.example.ts lib/config.ts
 
 在mysql中新建一个数据库
 
-修改lib/config.ts文件里的配置即可，配置自己的qq号和qq密码，以及数据库的一些配置
+修改lib/config.ts文件里的配置即可，配置自己的qq号和qq密码，以及配置对应数据库的一些配置
 
 yarn init:database:dev  or yarn init:database:prod   # 初始化数据库，自动生成表结构
+# 如果成功，终端会出现 "成功初始化表结构的字样" ,失败则会出现 "初始化表结构失败"的字样
 
-启动：
-开发环境下运行 yarn start:dev
+启动： # 第一次会提示你登陆
+开发环境下运行 yarn start:dev  # 会读取lib/config.ts文件里面不同环境下的数据库的配置
 
 生产环境下运行 yarn start:prod
 ```
+
+# 登陆
+
+第一次运行需要滑块登陆，同时会在 lib 目录下生成一个 data 文件夹（不要删除），
+同时命令行里会提示让你填写 ticket，点击链接跳转到滑块登陆页面，先打开开发者工具，
+再移动滑块登陆，之后从开发者工具网络请求中 cap_union_new_verity 中得到 ticket，复制它的值粘贴到命令行中即可登陆（之后可不用重复登陆）
 
 # 命令 options
 
 1. 默认情况下是发送第一条没有发过的的面试题
    如果你想要随机从数据库中发送一条面试题，你可以在原有的命令后面加上 random=true
-2. 一般情况下你可以在 lib/config.ts 下面配置你想要发送的群（机器人必须在群里才可以），当然你也可以使用命令行的方式指定发送到某个群，在原有的命令后面加上 groupId=[your group number]
-3. 你可以指定是否 at 全体成员，默认不 at 全体，在原有的命令后面添加 atall=true 即可艾特全体成员(机器人有 at 全体的次数)
+2. 一般情况下你可以在 `lib/config.ts` 下面配置你想要发送的群（机器人必须在群里才可以），你也可以使用命令行的方式指定发送到某个群，在原有的命令后面加上 `groupId=[your group number]` （命令行的优先级高于配置文件）
+3. 你可以指定是否在发送面试题的时候 at 全体成员，默认不 at 全体，在原有的命令后面添加 `atall=true` 即可艾特全体成员(如果机器人有 at 全体成员的次数)
 
 > eg: yarn start:prod random=true groupId=123456789 atall=true
-
-# 登陆
-
-第一次运行需要滑块登陆，同时会在 lib 目录下生成一个 data 文件夹（不要删除），同时命令行里会提示让你填写 ticket，点击链接跳转到滑块登陆页面，打开开发者工具，移动滑块登陆之后，从开发者工具网络请求 cap_union_new_verity 中得到 ticket，复制粘贴到命令行中即可登陆（之后可不用重复登陆）
+> ![leftover](https://leftover-md.oss-cn-guangzhou.aliyuncs.com/img-md/20220926235806-2022-09-26.png)
 
 # 部署
 
 将本地项目传到服务器上，并下载好依赖，在服务器上配置好数据库
 
 ```shell
-echo $PATH #复制结果
+echo $PATH #复制输出的结果
 
 crontab -e  # 创建定时任务
+
 将复制的结果粘贴到第一行  # 因为crontab里面的环境和服务器上的环境不一致，所以需要先设置一下crontab的环境
 
 # 设置定时任务 ，类似下图框出来的部分，替换一下路径和命令即可,图中设置的是每日10点发送面试题
+#00 10 * * * cd /www/wwwroot/server/qqRot-interview && yarn start:prod  groupId=782234631
 ```
 
 <img src="https://leftover-md.oss-cn-guangzhou.aliyuncs.com/img-md/20220916231710-2022-09-16.png"/>
