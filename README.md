@@ -1,10 +1,10 @@
 <div align="center">
-<img src="https://api.leftover.cn/api/last-updated/shields?owner=left0ver&repo=qqRot-interview"/>
-<img src="https://img.shields.io/github/license/left0ver/qqRot-interview"/>
-<img src="https://img.shields.io/github/package-json/v/left0ver/qqRot-interview"/>
+<img src="https://api.leftover.cn/api/last-updated/shields?owner=robot-bingbing&repo=qqRot-interview"/>
+<img src="https://img.shields.io/github/license/robot-bingbing/qqRot-interview"/>
+<img src="https://img.shields.io/github/package-json/v/robot-bingbing/qqRot-interview"/>
 <img src="https://img.shields.io/badge/language-typescript-blue"/>
 <img src="https://img.shields.io/badge/database-mysql-%230074a3"/>
-<img src="https://visitor-badge.glitch.me/badge?page_id=left0ver.qqRot-interview"/>
+<img src="https://visitor-badge.glitch.me/badge?page_id=robot-bingbing.qqRot-interview"/>
 </div>
 
 如果觉得本项目对您有帮助，那就点个 star 吧 💕
@@ -25,7 +25,7 @@
 # setup
 
 ```shell
-git clone  --depth=1 https://github.com/left0ver/qqRot-interview.git
+git clone  --depth=1 https://github.com/robot-bingbing/qqRot-interview.git
 
 cd qqRot-interview
 
@@ -94,4 +94,4 @@ crontab -e  # 创建定时任务
 
 # License
 
-[MIT](https://github.com/left0ver/qqRot-interview/blob/main/LICENSE)
+[MIT](https://github.com/robot-bingbing/qqRot-interview/blob/main/LICENSE)
