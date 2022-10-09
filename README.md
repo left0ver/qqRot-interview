@@ -11,7 +11,9 @@
 
 # overview
 
-该项目是基于[oicq](https://github.com/takayama-lily/oicq)的一个 qq 机器人，用于每日定时向 qq 群里面发送面试题，支持部署到自己的服务器,前端使用 ts，数据库使用 mysql
+该项目是基于[oicq](https://github.com/takayama-lily/oicq)的一个 qq 机器人，用于每日定时向 qq 群里面发送面试题，支持部署到自己的服务器,前端使用 ts，数据库使用 mysql。
+
+[add-interview](https://github.com/robot-bingbing/add-interview)可以帮助您快速地向数据库中录入面试题，您可以将其部署到自己的服务器上。
 
 # Example
 
@@ -87,7 +89,7 @@ crontab -e  # 创建定时任务
 
 - [ ] ~~使用 github action 做定时任务~~
 - [x] 使用 typeorm 来重构数据库的操作
-- [ ] 搭建一个前台用来录入面试题
+- [x] 搭建一个前台用来录入面试题
 - [ ] 添加对微信机器人的支持
 - [ ] 添加查询天气预报的功能
 - [ ] 使用 vuepress 或者 vitepress 来编写使用文档
