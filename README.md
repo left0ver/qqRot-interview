@@ -76,10 +76,10 @@ crontab -e  # 创建定时任务
 将复制的结果粘贴到第一行  # 因为crontab里面的环境和服务器上的环境不一致，所以需要先设置一下crontab的环境
 
 # 设置定时任务 ，类似下图框出来的部分，替换一下路径和命令即可,图中设置的是每日10点发送面试题
-#00 10 * * * cd /www/wwwroot/server/qqRot-interview && yarn start:prod  groupId=782234631
+00 10 * * * cd /www/wwwroot/server/qqRot-interview && yarn start:prod  groupId=782234631
 ```
 
-<img src="https://leftover-md.oss-cn-guangzhou.aliyuncs.com/img-md/20220916231710-2022-09-16.png"/>
+<img src="https://leftover-md.oss-cn-guangzhou.aliyuncs.com/img-md/20220916231710-2022-09-16 (1)-2022-10-16.png"/>
 
 对于定时任务不了解的同学可以看一下这个[教程](https://www.cnblogs.com/colinliu/p/crontab.html)
 
