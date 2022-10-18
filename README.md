@@ -4,7 +4,7 @@
 <img src="https://img.shields.io/github/package-json/v/robot-bingbing/qqRot-interview"/>
 <img src="https://img.shields.io/badge/language-typescript-blue"/>
 <img src="https://img.shields.io/badge/database-mysql-%230074a3"/>
-<img src="https://visitor-badge.glitch.me/badge?page_id=robot-bingbing.qqRot-interview"/>
+<img src="https://visitor.leftover.cn?id=robot-bingbing.qqRot-interview"/>
 </div>
 
 如果觉得本项目对您有帮助，那就点个 star 吧 💕
