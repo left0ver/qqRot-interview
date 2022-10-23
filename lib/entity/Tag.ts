@@ -1,9 +1,4 @@
-import {
-  Entity,
-  Column,
-  ManyToMany,
-  PrimaryColumn,
-} from 'typeorm'
+import { Entity, Column, ManyToMany, PrimaryColumn } from 'typeorm'
 import { Question } from './Question'
 
 @Entity('tag')

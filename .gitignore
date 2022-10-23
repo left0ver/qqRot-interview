@@ -1,4 +1,4 @@
 node_modules
-lib/config.ts
 lib/data
 .DS_Store
+.env

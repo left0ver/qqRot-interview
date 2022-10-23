@@ -14,14 +14,12 @@
   "author": "left0ver <1614674987@qq.com>",
   "license": "MIT",
   "scripts": {
-    "start:prod": "cross-env NODE_ENV=production esno lib/index.ts",
-    "start:dev": "cross-env NODE_ENV=development esno lib/index.ts",
-    "init:database:prod": "cross-env NODE_ENV=production esno lib/initDataBase.ts",
-    "init:database:dev": "cross-env NODE_ENV=development esno lib/initDataBase.ts",
-    "start": "npm run start:prod"
+    "init:database": "esno lib/initDataBase.ts",
+    "start": "esno lib/index.ts"
   },
   "dependencies": {
     "cron": "^2.1.0",
+    "dotenv": "^16.0.3",
     "mysql2": "^2.3.3",
     "oicq": "^2.3.1",
     "reflect-metadata": "^0.1.13",
@@ -32,7 +30,6 @@
     "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
-    "cross-env": "^7.0.3",
     "eslint": "^8.23.1",
     "esno": "^0.16.3",
     "leftover-prettier": "^0.0.4",
