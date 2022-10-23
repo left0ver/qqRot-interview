@@ -1,3 +1,3 @@
 module.exports = {
-  ...require("leftover-prettier"),
-};
+  ...require('leftover-prettier'),
+}
