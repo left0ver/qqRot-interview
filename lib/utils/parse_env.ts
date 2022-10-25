@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { Config } from './type'
+import { Config } from '../type'
 
 dotenv.config()
 const {
