@@ -1,10 +1,17 @@
 import { sendMessage } from './utils/sendMessage'
-import { serviceType } from './constant'
+import { serviceType, service } from './constant'
 import type { GroupMessageEvent } from 'oicq'
 export async function sendDefaultTips(event: GroupMessageEvent) {
+  let serviceDescription: string = ''
+  for (let i = 0; i < service.length; i++) {
+    serviceDescription +=
+      i === service.length - 1
+        ? service[i].description
+        : `${service[i].description} \n`
+  }
   const serviceTips = `
 请发送指定的序号进入对应的服务
-1. 获取指定分类的面试题`
+${serviceDescription}`
   await sendMessage(event, serviceTips)
 }
 

@@ -36,3 +36,9 @@ export interface SendInterviewCOnfig {
   isAtAll: boolean
   isRandom: boolean
 }
+
+export interface Service {
+  serviceId: number
+  description: string
+  needEnter: boolean
+}

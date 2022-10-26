@@ -2,11 +2,11 @@ import { createClient, TextElem } from 'oicq'
 import { accountInfo, groupId, sendInterviewConfig } from './config'
 import sendInterview from './send_interview'
 import { CronJob } from 'cron'
-import { serviceType } from './constant'
+import { serviceType, service, EXITCODE } from './constant'
 import { sendDefaultTips, sendServiceTips } from './send_tips'
 import { handleService } from './handleService'
 
-export default function robot() {
+export default async function robot() {
   const { timingSend, cron, isAtAll, isRandom } = sendInterviewConfig
   const bot = createClient(accountInfo.account)
   const group = bot.pickGroup(groupId)
@@ -54,29 +54,33 @@ export default function robot() {
           }
         }
       }
+      // 用户返回上一级
+      if (parseInt(content) === EXITCODE) {
+        currentType = -1
+        status = false
+      }
       // 用户第一次发送某个服务的序号，比如1，这时候给用户发送一个关于该服务的一些描述以及提示
       if (!status && currentType !== -1) {
         await sendServiceTips(currentType, event)
       }
       // status 为true时，currentType一定不为-1
       if (status) {
-        // 回到上一级
-        if (parseInt(content) === serviceType.EXIT) {
+        // 执行某个服务
+        handleService(currentType, event)
+        // 某些不用进入的服务可以在这里执行自动退出
+        const isNeedEnter = service.find(item => {
+          return item.serviceId === currentType
+        })?.needEnter
+        if (!isNeedEnter) {
           currentType = -1
           status = false
-        } else {
-          // 执行某个服务
-          handleService(currentType, event)
-          // 某些不用进入的服务可以在这里执行自动退出
-          // currentType = -1
-          // status = false
         }
       }
-      status = currentType === -1 ? false : true
-      // 发送了错误的消息导致没有进入service || 回到上一级的时候
-      if (currentType === -1) {
-        await sendDefaultTips(event)
-      }
+    }
+    status = currentType === -1 ? false : true
+    // 发送了错误的消息导致没有进入service || 回到上一级的时候
+    if (currentType === -1) {
+      await sendDefaultTips(event)
     }
   })
   bot.on('system.offline.kickoff', async () => {
