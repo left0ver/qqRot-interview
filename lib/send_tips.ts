@@ -1,4 +1,4 @@
-import { sendMessage } from './utils/sendMessage'
+import { sendMessage } from './utils/index'
 import { serviceType, service } from './constant'
 import type { GroupMessageEvent } from 'oicq'
 export async function sendDefaultTips(event: GroupMessageEvent) {

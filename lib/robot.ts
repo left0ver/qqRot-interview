@@ -5,7 +5,7 @@ import { CronJob } from 'cron'
 import { serviceType, service, EXITCODE } from './constant'
 import { sendDefaultTips, sendServiceTips } from './send_tips'
 import { handleService } from './handleService'
-import { isInGroup } from './utils/isInGroup'
+import { isInGroup } from './utils/index'
 
 export default async function robot() {
   const { timingSend, cron, isAtAll, isRandom } = sendInterviewConfig

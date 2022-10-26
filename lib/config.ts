@@ -1,5 +1,5 @@
 import { DefaultNamingStrategy } from 'typeorm'
-import { config } from './utils/parse_env'
+import { config } from './utils/index'
 import type { Account, DataBaseInfo, SendInterviewCOnfig } from './type'
 
 const {
