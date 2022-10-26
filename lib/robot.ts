@@ -5,6 +5,7 @@ import { CronJob } from 'cron'
 import { serviceType, service, EXITCODE } from './constant'
 import { sendDefaultTips, sendServiceTips } from './send_tips'
 import { handleService } from './handleService'
+import { isInGroup } from './utils/isInGroup'
 
 export default async function robot() {
   const { timingSend, cron, isAtAll, isRandom } = sendInterviewConfig
@@ -24,6 +25,12 @@ export default async function robot() {
     .login(accountInfo.password)
 
   bot.on('system.online', async () => {
+    // 机器人不在群里
+    if (!(await isInGroup(group))) {
+      console.error('您的机器人🤖️不在该群,请加入该群之后重试')
+      process.exit(1)
+    }
+    // 如果timingSend，每天定时向群里发送面试题
     if (timingSend) {
       const job = new CronJob(
         cron,
