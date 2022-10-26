@@ -56,7 +56,7 @@ export default function robot() {
       }
       // 用户第一次发送某个服务的序号，比如1，这时候给用户发送一个关于该服务的一些描述以及提示
       if (!status && currentType !== -1) {
-        await sendServiceTips(event, currentType)
+        await sendServiceTips(currentType, event)
       }
       // status 为true时，currentType一定不为-1
       if (status) {

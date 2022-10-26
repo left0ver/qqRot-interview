@@ -9,8 +9,8 @@ export async function sendDefaultTips(event: GroupMessageEvent) {
 }
 
 export async function sendServiceTips(
-  event: GroupMessageEvent,
   currentType: number,
+  event: GroupMessageEvent,
 ) {
   let message: string = ''
   switch (currentType) {
