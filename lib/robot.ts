@@ -2,7 +2,7 @@ import { createClient, TextElem } from 'oicq'
 import { accountInfo, groupId, sendInterviewConfig } from './config'
 import sendInterview from './send_interview'
 import { CronJob } from 'cron'
-import { serviceType, service, EXITCODE } from './constant'
+import { serviceType, getServiceDetail, EXITCODE } from './constant'
 import { sendDefaultTips, sendServiceTips } from './send_tips'
 import { handleService } from './handleService'
 import { isInGroup } from './utils/index'
@@ -75,7 +75,8 @@ export default async function robot() {
         // 执行某个服务
         handleService(currentType, event)
         // 某些不用进入的服务可以在这里执行自动退出
-        const isNeedEnter = service.find(item => {
+        const serviceDetail =await getServiceDetail()
+        const isNeedEnter = serviceDetail.find(item => {
           return item.serviceId === currentType
         })?.needEnter
         if (!isNeedEnter) {

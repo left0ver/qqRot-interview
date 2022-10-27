@@ -41,4 +41,5 @@ export interface Service {
   serviceId: number
   description: string
   needEnter: boolean
+  usage: string
 }
