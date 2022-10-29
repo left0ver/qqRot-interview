@@ -1,19 +1,9 @@
-import { DataSource } from 'typeorm'
-import { Question } from './entity/Question'
-import { Tag } from './entity/Tag'
-import { databaseInfo, MyNamingStrategy } from './config'
+import {getAppDataSource} from './utils/index'
 async function init() {
   try {
-    const AppDataSource = new DataSource({
-      ...databaseInfo,
-      type: 'mysql',
-      entities: [Question, Tag],
-      synchronize: true,
-      logging: false,
-      namingStrategy: new MyNamingStrategy(),
-    })
-    await AppDataSource.initialize()
+    const AppDataSource = await getAppDataSource()
     await AppDataSource.destroy()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message)
   }

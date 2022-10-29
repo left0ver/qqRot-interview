@@ -16,6 +16,7 @@ export async function getAppDataSource() {
     !AppDataSource.isInitialized && (await AppDataSource.initialize())
     return AppDataSource
   } catch (error) {
+    console.error(error)
     console.error('数据库初始化失败')
     process.exit(1)
   }

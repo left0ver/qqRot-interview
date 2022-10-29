@@ -1,25 +1,14 @@
-import { DataSource } from 'typeorm'
 import { segment, Group } from 'oicq'
 import { Question } from './entity/Question'
-import { Tag } from './entity/Tag'
-import { databaseInfo, MyNamingStrategy } from './config'
+import {getAppDataSource} from './utils/index'
 export default async function sendInterview(
   group: Group,
   isRandom: boolean,
   isAtAll: boolean,
 ) {
   // 连接数据库
-  const AppDataSource = new DataSource({
-    ...databaseInfo,
-    type: 'mysql',
-    entities: [Question, Tag],
-    synchronize: true,
-    logging: false,
-    namingStrategy: new MyNamingStrategy(),
-  })
-
+    const AppDataSource= await getAppDataSource()
   try {
-    !AppDataSource.isInitialized && (await AppDataSource.initialize())
     const questionRepository = AppDataSource.getRepository(Question)
     let rowData: Question | undefined | null = undefined
 

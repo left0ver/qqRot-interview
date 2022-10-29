@@ -1,5 +1,5 @@
 import type { Service } from './type'
-import { getAppDataSource } from './utils/getAppDataSource'
+import { getAppDataSource } from './utils/index'
 import { Tag } from './entity/Tag'
 export enum serviceType {
   SEND_INTERVIEW_WITH_TAG = 1,
@@ -14,6 +14,7 @@ export enum serviceType {
     const tagArr =data.map(value=>{
       return value.tagName
     })
+   await AppDataSource.destroy()
     return tagArr
 }
 // 定义对应的服务id，以及其描述，用户是否需要继续进入该服务里面
