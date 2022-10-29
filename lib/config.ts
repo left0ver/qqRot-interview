@@ -5,6 +5,7 @@ import type { Account, DataBaseInfo, SendInterviewCOnfig } from './type'
 const {
   ACCOUNT,
   PASSWORD,
+  ROBOT_NAME,
   DATA_BASE_HOST,
   DATA_BASE_NAME,
   DATA_BASE_PASSWORD,
@@ -39,6 +40,7 @@ const groupId: number = GROUP_ID //qq群号
 
 const sendInterviewConfig: SendInterviewCOnfig = {
   timingSend: TIMING_SEND, //是否每日定时发送面试题
+  robotName: ROBOT_NAME, //机器人名字
   cron: CRON, //每日定时发送面试题的时间,遵循cron表达式，详情查看https://juejin.cn/post/6844904047237955592
   isAtAll: ATAll, //定时发送面试题时是否at全体成员
   isRandom: RANDOM, //定时发送面试题时是否随机发送一个面试题,如果为false，则会发送数据库中第一个从来没有被发送过的面试题

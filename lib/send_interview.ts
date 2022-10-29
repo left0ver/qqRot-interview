@@ -5,6 +5,7 @@ export default async function sendInterview(
   group: Group,
   isRandom: boolean,
   isAtAll: boolean,
+  robotName: string
 ) {
   // 连接数据库
     const AppDataSource= await getAppDataSource()
@@ -32,7 +33,7 @@ export default async function sendInterview(
       // at全体
       const atAll = segment.at('all')
       const tip = segment.text('每日一题：\n')
-      const invite = segment.text(' 大家快来和小冰一起做题吧! ')
+      const invite = segment.text(` 大家快来和${robotName}一起做题吧! `)
       // 加油必胜表情
       const faceEnjoy = segment.face(245)
       await group.sendMsg([tip, rowData.question])

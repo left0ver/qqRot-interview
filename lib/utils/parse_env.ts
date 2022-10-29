@@ -5,6 +5,7 @@ dotenv.config()
 const {
   ACCOUNT = '',
   PASSWORD = '',
+  ROBOT_NAME = '小冰',
   DATA_BASE_HOST = 'localhost',
   DATA_BASE_USERNAME = 'root',
   DATA_BASE_PASSWORD = '',
@@ -20,6 +21,7 @@ const {
 export const config: Config = {
   ACCOUNT: parseInt(ACCOUNT),
   PASSWORD,
+  ROBOT_NAME,
   DATA_BASE_HOST,
   DATA_BASE_USERNAME,
   DATA_BASE_PASSWORD,

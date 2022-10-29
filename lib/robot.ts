@@ -8,7 +8,7 @@ import { handleService } from './handleService'
 import { isInGroup } from './utils/index'
 
 export default async function robot() {
-  const { timingSend, cron, isAtAll, isRandom } = sendInterviewConfig
+  const { timingSend, cron, isAtAll, isRandom ,robotName} = sendInterviewConfig
   const bot = createClient(accountInfo.account)
   const group = bot.pickGroup(groupId)
   // 是否进去了某个service里面
@@ -35,7 +35,7 @@ export default async function robot() {
       const job = new CronJob(
         cron,
         async () => {
-          await sendInterview(group, isRandom, isAtAll)
+          await sendInterview(group, isRandom, isAtAll,robotName)
         },
         null,
         false,

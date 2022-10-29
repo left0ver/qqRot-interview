@@ -6,6 +6,7 @@ export interface Args {
 export interface Config {
   ACCOUNT: number
   PASSWORD: string
+  ROBOT_NAME:string
   DATA_BASE_HOST: string
   DATA_BASE_USERNAME: string
   DATA_BASE_PASSWORD: string
@@ -31,6 +32,7 @@ export interface DataBaseInfo {
   database: string
 }
 export interface SendInterviewCOnfig {
+  robotName:string
   cron: string
   timingSend: boolean
   isAtAll: boolean
