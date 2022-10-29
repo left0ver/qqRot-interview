@@ -9,7 +9,7 @@ const {
   DATA_BASE_USERNAME = 'root',
   DATA_BASE_PASSWORD = '',
   DATA_BASE_PORT = '3306',
-  DATA_BASE_NAME = 'qqRot',
+  DATA_BASE_NAME = 'qqrot',
   GROUP_ID = '',
   TIMING_SEND = 'true',
   CRON = '00 00 10 * * *',

@@ -3,13 +3,14 @@ import { databaseInfo, MyNamingStrategy } from '../config'
 import { Question } from '../entity/Question'
 import { Tag } from '../entity/Tag'
 
-export async function getAppDataSource() {
+export async function getAppDataSource(synchronize = false) {
   try {
     const AppDataSource = new DataSource({
       ...databaseInfo,
       type: 'mysql',
       entities: [Question, Tag],
-      synchronize: false,
+      // 自动创建表结构在每次启动的时候，这在初始化数据库的时候有用，其他的时候应该设置为false
+      synchronize,
       logging: false,
       namingStrategy: new MyNamingStrategy(),
       connectorPackage:'mysql2'
