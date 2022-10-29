@@ -9,9 +9,10 @@ export async function getAppDataSource() {
       ...databaseInfo,
       type: 'mysql',
       entities: [Question, Tag],
-      synchronize: true,
+      synchronize: false,
       logging: false,
       namingStrategy: new MyNamingStrategy(),
+      connectorPackage:'mysql2'
     })
     !AppDataSource.isInitialized && (await AppDataSource.initialize())
     return AppDataSource
