@@ -75,7 +75,7 @@ export default async function robot() {
         // 执行某个服务
         handleService(currentType, event)
         // 某些不用进入的服务可以在这里执行自动退出
-        const serviceDetail =await getServiceDetail()
+        const serviceDetail = await getServiceDetail()
         const isNeedEnter = serviceDetail.find(item => {
           return item.serviceId === currentType
         })?.needEnter
@@ -84,11 +84,11 @@ export default async function robot() {
           status = false
         }
       }
-    }
-    status = currentType === -1 ? false : true
-    // 发送了错误的消息导致没有进入service || 回到上一级的时候
-    if (currentType === -1) {
-      await sendDefaultTips(event)
+      status = currentType === -1 ? false : true
+      // 发送了错误的消息导致没有进入service || 回到上一级的时候
+      if (currentType === -1) {
+        await sendDefaultTips(event)
+      }
     }
   })
   bot.on('system.offline.kickoff', async () => {
