@@ -15,13 +15,16 @@
   "license": "MIT",
   "scripts": {
     "init:database": "esno lib/initDataBase.ts",
-    "start": "esno lib/index.ts"
+    "start": "esno lib/index.ts",
+    "postinstall": "yarn patch-package"
   },
   "dependencies": {
     "cron": "^2.1.0",
     "dotenv": "^16.0.3",
     "mysql2": "^2.3.3",
     "oicq": "^2.3.1",
+    "patch-package": "^6.5.0",
+    "postinstall-postinstall": "^2.1.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.10"
   },
