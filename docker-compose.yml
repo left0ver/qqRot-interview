@@ -1,0 +1,36 @@
+version: '3.1'
+services:
+  mysql_server:
+    image: left0ver/qqrot-interview-mysql
+    container_name: qqrot-mysql-server
+    platform: linux/amd64
+    ports:
+      - 12501:3306
+    volumes:
+     - qqrot-interview-mysql-data:/var/lib/mysql
+    restart: on-failure
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    expose:
+      - 3306
+    networks:
+      qqrot-interview-network:
+
+  server:
+    container_name: qqrot-server
+    image: left0ver/qqrot-interview-node
+    restart: on-failure
+    env_file:
+      - ./.env
+    depends_on:
+      - mysql_server
+    networks:
+      qqrot-interview-network:
+
+volumes:
+   qqrot-interview-mysql-data:
+     name: qqrot-interview-mysql-data
+networks:
+  qqrot-interview-network:
+    name: qqrot-interview-network
+    driver: bridge

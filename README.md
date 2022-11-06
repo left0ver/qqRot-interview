@@ -7,7 +7,7 @@
 <img src="https://visitor.leftover.cn?id=robot-bingbing.qqRot-interview"/>
 </div>
 
-如果觉得本项目对您有帮助，那就点个 star 吧 💕
+如果觉得本项目对您有帮助，那就点个 star 吧 :two_hearts:
 
 # overview
 
@@ -27,8 +27,45 @@
 - :zap: 一分钟配置，即可开箱即用
 - :rocket: 定时发送面试题
 - :tada: 将面试题进行分类，群友@机器人，发送对应的类别，机器人将从数据库中随机获取并发送一条该类别的面试题
+- :two_hearts: 支持 docker 快速部署
 
-# setup
+# Deploy
+
+## Docker-compose
+
+```shell
+1. git clone  --depth=1 https://github.com/robot-bingbing/qqRot-interview.git
+
+2. cd qqRot-interview
+
+3. cp .env.example .env # 按照文件里的说明修改配置
+
+4. docker-compose up #第一次会提示登录，出现加载好友成功，则说明部署成功
+
+```
+
+## Docker
+
+```shell
+1. git clone  --depth=1 https://github.com/robot-bingbing/qqRot-interview.git
+
+2. cd qqRot-interview
+
+3. docker network create qqrot-interview-network
+
+# -e MYSQL_ROOT_PASSWORD 设置数据库密码，mysql环境变量see https://hub.docker.com/_/mysql
+
+4. docker run -it -e MYSQL_ROOT_PASSWORD=123456 -p 12501:3306 --network qqrot-interview-network --restart  on-failure --platform linux/amd64 --name qqrot-mysql-server -v qqrot-interview-mysql-data:/var/lib/mysql left0ver/qqrot-interview-mysql
+
+5. cp .env.example .env # 按照文件里的说明修改配置
+
+# 具体环境变量看 https://github.com/robot-bingbing/qqRot-interview/blob/main/.env.example
+#第一次会提示登录，出现加载好友成功，则说明部署成功
+
+6. docker run -it --env-file  ./.env --network qqrot-interview-network --restart on-failure --name qqrot-server --platform  linux/amd64 left0ver/qqrot-interview-node
+```
+
+## Manual
 
 ```shell
 1. git clone  --depth=1 https://github.com/robot-bingbing/qqRot-interview.git
@@ -37,7 +74,7 @@
 
 3. yarn install
 
-4. 在mysql中新建一个数据库
+4. 在mysql中新建一个数据库 qqrot
 
 5. cp .env.example .env
 
