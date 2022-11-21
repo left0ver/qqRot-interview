@@ -16,7 +16,9 @@
   "scripts": {
     "init:database": "esno lib/initDataBase.ts",
     "start": "esno lib/index.ts",
-    "postinstall": "yarn patch-package"
+    "postinstall": "yarn patch-package",
+    "build:mysql":"docker build -t left0ver/qqrot-interview-mysql:latest --platform linux/amd64 ./build/mysql",
+    "build:node":"docker build -t left0ver/qqrot-interview-node:latest -f build/node/Dockerfile ."
   },
   "dependencies": {
     "cron": "^2.1.0",

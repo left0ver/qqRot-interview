@@ -55,14 +55,14 @@
 
 # -e MYSQL_ROOT_PASSWORD 设置数据库密码，mysql环境变量see https://hub.docker.com/_/mysql
 
-4. docker run -it -e MYSQL_ROOT_PASSWORD=123456 -p 12501:3306 --network qqrot-interview-network --restart  on-failure --platform linux/amd64 --name qqrot-mysql-server -v qqrot-interview-mysql-data:/var/lib/mysql left0ver/qqrot-interview-mysql
+4. docker run -it -e MYSQL_ROOT_PASSWORD=123456 -p 12501:3306 --network qqrot-interview-network --restart  on-failure --platform linux/amd64 --name qqrot-mysql-server -v qqrot-interview-mysql-data:/var/lib/mysql registry.cn-hangzhou.aliyuncs.com/left0ver/qqrot-interview-mysql
 
 5. cp .env.example .env # 按照文件里的说明修改配置
 
 # 具体环境变量看 https://github.com/robot-bingbing/qqRot-interview/blob/main/.env.example
 #第一次会提示登录，出现加载好友成功，则说明部署成功
 
-6. docker run -it --env-file  ./.env --network qqrot-interview-network --restart on-failure --name qqrot-server --platform  linux/amd64 left0ver/qqrot-interview-node
+6. docker run -it --env-file  ./.env --network qqrot-interview-network --restart on-failure --name qqrot-server --platform  linux/amd64 registry.cn-hangzhou.aliyuncs.com/left0ver/qqrot-interview-node
 ```
 
 ## Manual

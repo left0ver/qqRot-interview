@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   mysql_server:
-    image: left0ver/qqrot-interview-mysql
+    image: registry.cn-hangzhou.aliyuncs.com/left0ver/qqrot-interview-mysql
     container_name: qqrot-mysql-server
     platform: linux/amd64
     ports:
@@ -18,7 +18,7 @@ services:
 
   server:
     container_name: qqrot-server
-    image: left0ver/qqrot-interview-node
+    image: registry.cn-hangzhou.aliyuncs.com/left0ver/qqrot-interview-node
     restart: on-failure
     env_file:
       - ./.env
