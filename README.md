@@ -11,7 +11,7 @@
 
 # overview
 
-基于[oicq](https://github.com/takayama-lily/oicq)的一个 qq 机器人，可用于每日定时向 qq 群里面发送面试题或者@机器人发送对应的 tag，机器人即可发送对应类别的面试题，部署简单，简单配置即可开箱即用，支持部署到自己的服务器,前端使用 ts，数据库使用 mysql
+基于[oicq](https://github.com/takayama-lily/oicq)的一个 qq 机器人，可用于每日定时向 qq 群里面发送面试题或者@机器人发送对应的 tag，机器人即可发送对应类别的面试题，部署简单，简单配置即可开箱即用，支持部署到自己的服务器,后端使用的是node，数据库使用 mysql
 
 [add-interview](https://github.com/robot-bingbing/add-interview)可以帮助您快速地向数据库中录入面试题，您可以将其部署到自己的服务器上。
 
